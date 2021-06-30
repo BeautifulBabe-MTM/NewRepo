@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp17
 {
@@ -43,16 +44,15 @@ namespace WindowsFormsApp17
             this.label1.Location = new System.Drawing.Point(30, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 108);
-            this.label1.Text = $"{DateTime.Now.ToShortTimeString()}";
             this.label1.TabIndex = 0;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(230, 100);
+            this.panel1.Location = new System.Drawing.Point(150, 100);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 232);
+            this.panel1.Size = new System.Drawing.Size(450, 232);
             this.panel1.TabIndex = 1;
             this.panel1.BackColor = Color.RosyBrown;
             // 
@@ -69,12 +69,22 @@ namespace WindowsFormsApp17
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
+            this.timer = new Timer();
+            this.timer.Interval = 1;
+            this.timer.Tick += Timer_Tick;
+            this.timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            this.label1.Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}:{DateTime.Now.Second}";
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private Timer timer;
         //private System.Windows.Forms.Button button1;
     }
 }
