@@ -65,8 +65,10 @@ namespace WindowsFormsApp17
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 63);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Settings";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Image = Image.FromFile("settings2.png");
+            this.button1.BackgroundImageLayout = ImageLayout.Zoom;
+            this.button1.Text = "Settings";
             this.button1.Click += (sender, args) =>
             {
                 Settings settings = new Settings();

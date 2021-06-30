@@ -1,7 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace WindowsFormsApp17
 {
+    [Serializable]
     partial class Settings
     {
         /// <summary>
@@ -38,10 +43,18 @@ namespace WindowsFormsApp17
             this.button1 = new System.Windows.Forms.Button();
             this.button1.Click += (sender, args) =>
             {
-                //ColorDialog colorDialog = new ColorDialog();
-                //colorDialog.AllowFullOpen = false;
-                //if (colorDialog.ShowDialog() == DialogResult.OK)
-              
+                ColorDialog colorDialog = new ColorDialog();
+                colorDialog.AllowFullOpen = false;
+                XmlSerializer saveColor = new XmlSerializer(typeof(ColorDialog));
+                using (FileStream fs = new FileStream("color.xml", FileMode.OpenOrCreate))
+                {
+                    saveColor.Serialize(fs, colorDialog);
+                }
+
+                using (FileStream fs = new FileStream("color.xml", FileMode.OpenOrCreate))
+                {
+                    ColorDialog newColor = (ColorDialog)saveColor.Deserialize(fs);
+                }
 
             };
             this.panel1.SuspendLayout();
